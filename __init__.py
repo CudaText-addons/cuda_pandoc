@@ -100,7 +100,11 @@ class Command:
     def run(self):
         fn_in = ed.get_filename()
         if not fn_in:
-            msg_status('Cannot convert untitled tab')
+            msg_status('[Pandoc] Cannot convert untitled tab')
+            return
+
+        if ed.get_prop(PROP_MODIFIED):
+            msg_status('[Pandoc] Please save file first')
             return
 
         format_in = get_format_in()
