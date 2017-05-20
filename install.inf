@@ -1,0 +1,11 @@
+[info]
+title=Pandoc Helper
+desc=Uses Pandoc tool, to convert several markup formats to output formats, which Pandoc supports (Word, PDF, Markdown etc)
+type=cudatext-plugin
+subdir=cuda_pandoc
+homepage=https://github.com/CudaText-addons/cuda_pandoc
+
+[item1]
+section=commands
+caption=Pandoc Helper\Convert...
+method=run
