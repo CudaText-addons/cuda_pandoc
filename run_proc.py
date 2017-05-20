@@ -1,3 +1,4 @@
+import cudatext as app
 import platform
 import subprocess
 
@@ -11,4 +12,7 @@ elif s=='Darwin':
 
 def run_pandoc(params_list):
     cmd = [exe]+params_list
-    subprocess.call(cmd, shell=False)
+    try:
+        subprocess.call(cmd, shell=False)
+    except:
+        app.msg_box('Error running Pandoc program (not in PATH?)', app.MB_OK+app.MB_ICONERROR)
