@@ -1,7 +1,9 @@
 import os
+import tempfile
 from cudatext import *
 from .run_proc import *
 
+TEMP_DIR = tempfile.gettempdir()
 
 FORMATS_IN = (
   'docbook',
@@ -59,6 +61,7 @@ FORMATS_OUT = (
   'textile',
   )
 
+
 def get_format_in():
     lexer = ed.get_prop(PROP_LEXER_FILE)
     res = None
@@ -95,10 +98,43 @@ def get_format_out():
 
 class Command:
     def run(self):
-        fn = ed.get_filename()
+        fn_in = ed.get_filename()
+        if not fn_in:
+            msg_status('Cannot convert untitled tab')
+            return
+
         format_in = get_format_in()
         format_out = get_format_out()
-        print(format_in, format_out)
 
+        fn_out = os.path.join(TEMP_DIR, '_pandoc.'+format_out)
+        if os.path.isfile(fn_out):
+            os.remove(fn_out)
+        if os.path.isfile(fn_out):
+            msg_status('[Pandoc] Cannot delete temp file')
+            return
 
+        args = [
+            fn_in,
+            '-f', format_in,
+            '-t', format_out,
+            '-o', fn_out
+            ]
+        run_pandoc(args)
 
+        ok = os.path.isfile(fn_out)
+        if ok:
+            res = 'converted!'
+        else:
+            res = 'failed...'
+
+        msg_status('[Pandoc] %s (%s) -> %s ... %s' % (
+            os.path.basename(fn_in),
+            format_in,
+            os.path.basename(fn_out),
+            res
+            ))
+
+        if ok:
+            msg_box('Pandoc: converted to file:\n'+fn_out, MB_OK+MB_ICONINFO)
+        else:
+            msg_box('Pandoc: failed to run with args:\n'+repr(args), MB_OK+MB_ICONERROR)
