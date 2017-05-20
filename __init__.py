@@ -135,6 +135,8 @@ class Command:
             ))
 
         if ok:
-            msg_box('Pandoc: converted to file:\n'+fn_out, MB_OK+MB_ICONINFO)
+            res = msg_box('Pandoc: converted to file:\n%s\n\nOpen resulting file?'%fn_out, MB_YESNO+MB_ICONINFO)
+            if res==ID_YES:
+                file_open(fn_out)
         else:
             msg_box('Pandoc: failed to run with args:\n'+repr(args), MB_OK+MB_ICONERROR)
