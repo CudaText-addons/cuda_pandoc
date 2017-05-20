@@ -1,4 +1,3 @@
-import os
 import platform
 import subprocess
 
@@ -12,4 +11,4 @@ elif s=='Darwin':
 
 def run_pandoc(params_list):
     cmd = [exe]+params_list
-    process = subprocess.call(cmd, shell=False)
+    subprocess.call(cmd, shell=False)
