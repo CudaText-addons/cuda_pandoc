@@ -108,7 +108,10 @@ class Command:
             return
 
         format_in = get_format_in()
+        if format_in is None: return
+
         format_out = get_format_out()
+        if format_out is None: return
 
         fn_out = os.path.join(TEMP_DIR, '_pandoc.'+format_out)
         if os.path.isfile(fn_out):
