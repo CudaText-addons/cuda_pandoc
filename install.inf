@@ -4,6 +4,7 @@ desc=Uses Pandoc tool, to convert several markup formats to output formats, whic
 type=cudatext-plugin
 subdir=cuda_pandoc
 homepage=https://github.com/CudaText-addons/cuda_pandoc
+api=1.0.364
 
 [item1]
 section=commands

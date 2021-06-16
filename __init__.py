@@ -81,7 +81,7 @@ def get_format_in():
         res = 'mediawiki'
     else:
         fmt = ['Input format: '+s for s in FORMATS_IN]
-        res = dlg_menu(MENU_LIST, '\n'.join(fmt))
+        res = dlg_menu(DMENU_LIST, fmt, caption='Input formats')
         if res is not None:
             res = FORMATS_IN[res]
 
@@ -90,7 +90,7 @@ def get_format_in():
 
 def get_format_out():
     fmt = ['Output format: '+s for s in FORMATS_OUT]
-    res = dlg_menu(MENU_LIST, '\n'.join(fmt))
+    res = dlg_menu(DMENU_LIST, fmt, caption='Output formats')
     if res is not None:
         res = FORMATS_OUT[res]
     return res
